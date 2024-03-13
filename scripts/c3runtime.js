@@ -4756,6 +4756,8 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Sprite.Acts.SetInstanceVar,
 		C3.Plugins.Sprite.Exps.Y,
 		C3.Plugins.Sprite.Acts.Destroy,
+		C3.Plugins.Sprite.Cnds.OnCreated,
+		C3.Plugins.Sprite.Cnds.IsBetweenAngles,
 		C3.Plugins.System.Cnds.OnLayoutStart
 	];
 };
@@ -4970,11 +4972,10 @@ self.C3_ExpressionFuncs = [
 			return () => n0.ExpObject();
 		},
 		() => 10,
-		() => 2.2,
-		p => {
-			const n0 = p._GetNode(0);
-			return () => n0.ExpInstVar();
-		},
+		() => 250,
+		() => 280,
+		() => 45,
+		() => 135,
 		() => 0.6
 ];
 
