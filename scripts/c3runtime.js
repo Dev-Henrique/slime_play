@@ -4599,9 +4599,9 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Platform.Cnds.OnStop,
 		C3.Behaviors.Platform.Cnds.OnLand,
 		C3.Behaviors.Platform.Cnds.IsMoving,
-		C3.Plugins.Keyboard.Cnds.IsKeyDown,
+		C3.Plugins.Touch.Cnds.OnTapGestureObject,
 		C3.Behaviors.Platform.Acts.SetMaxSpeed,
-		C3.Plugins.System.Cnds.Else,
+		C3.Plugins.Sprite.Acts.SetVisible,
 		C3.Plugins.System.Acts.RestartLayout,
 		C3.Behaviors.Sin.Exps.Value,
 		C3.Behaviors.Sin.Exps.Magnitude,
@@ -4640,7 +4640,8 @@ self.C3_JsPropNameTable = [
 	{arrowLeft: 0},
 	{arrowUp: 0},
 	{arrowRight: 0},
-	{Toque: 0}
+	{Toque: 0},
+	{Sprite8: 0}
 ];
 
 self.InstanceType = {
@@ -4664,7 +4665,8 @@ self.InstanceType = {
 	arrowLeft: class extends self.ISpriteInstance {},
 	arrowUp: class extends self.ISpriteInstance {},
 	arrowRight: class extends self.ISpriteInstance {},
-	Toque: class extends self.IInstance {}
+	Toque: class extends self.IInstance {},
+	Sprite8: class extends self.ISpriteInstance {}
 }
 }
 
