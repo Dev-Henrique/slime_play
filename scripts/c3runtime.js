@@ -4440,6 +4440,18 @@ index);return ret?ret.x:0},TagY(tag,index){const ret=this._GetTagPosition(tag,in
 }
 
 {
+'use strict';{const C3=self.C3;const DOM_COMPONENT_ID="progress-bar";C3.Plugins.progressbar=class ProgressBarPlugin extends C3.SDKDOMPluginBase{constructor(opts){super(opts,DOM_COMPONENT_ID);this.AddElementMessageHandler("click",(sdkInst,e)=>sdkInst._OnClick(e))}Release(){super.Release()}}}{const C3=self.C3;C3.Plugins.progressbar.Type=class ProgressBarType extends C3.SDKTypeBase{constructor(objectClass){super(objectClass)}Release(){super.Release()}OnCreate(){}}}
+{const C3=self.C3;const C3X=self.C3X;const VALUE=0;const MAXIMUM=1;const TOOLTIP=2;const INITIALLY_VISIBLE=3;const ID=4;const CLASS_NAME=5;const DOM_COMPONENT_ID="progress-bar";C3.Plugins.progressbar.Instance=class ProgressBarInstance extends C3.SDKDOMInstanceBase{constructor(inst,properties){super(inst,DOM_COMPONENT_ID);this._value=0;this._max=100;this._title="";this._id="";this._className="";if(properties){this._value=properties[VALUE];this._max=properties[MAXIMUM];this._title=properties[TOOLTIP];
+this.GetWorldInfo().SetVisible(properties[INITIALLY_VISIBLE]);this._id=properties[ID];this._className=properties[CLASS_NAME]}this.CreateElement({"id":this._id,"className":this._className})}Release(){super.Release()}GetElementState(){return{"value":this._value,"max":this._max,"title":this._title}}async _OnClick(e){this.DispatchScriptEvent("click");await this.TriggerAsync(C3.Plugins.progressbar.Cnds.OnClicked)}_SetTooltip(title){if(this._title===title)return;this._title=title;this.UpdateElementState()}_GetTooltip(){return this._title}_SetProgress(x){if(this._value===
+x)return;this._value=x;this.UpdateElementState()}_GetProgress(){return this._value}_SetMaximum(x){if(this._max===x)return;this._max=x;this.UpdateElementState()}_GetMaximum(){return this._max}_SetIndeterminate(){this._max=0;this._value=0;this.UpdateElementState()}Draw(renderer){}SaveToJson(){return{"v":this._value,"m":this._max,"t":this._title,"id":this._id}}LoadFromJson(o){this._value=o["v"];this._max=o["m"];this._title=o["t"];this._id=o["id"];this.UpdateElementState()}GetPropertyValueByIndex(index){switch(index){case VALUE:return this._GetProgress();
+case MAXIMUM:return this._GetMaximum();case TOOLTIP:return this._GetTooltip()}}SetPropertyValueByIndex(index,value){switch(index){case VALUE:this._SetProgress(value);break;case MAXIMUM:this._SetMaximum(value);break;case TOOLTIP:this._SetTooltip(value);break}}GetDebuggerProperties(){const prefix="plugins.progressbar";return[{title:prefix+".name",properties:[{name:prefix+".properties.value.name",value:this._GetProgress(),onedit:v=>this._SetProgress(v)},{name:prefix+".properties.maximum.name",value:this._GetMaximum(),
+onedit:v=>this._SetMaximum(v)}]}]}GetScriptInterfaceClass(){return self.IProgressBarInstance}};const map=new WeakMap;self.IProgressBarInstance=class IProgressBarInstance extends self.IDOMInstance{constructor(){super();map.set(this,self.IInstance._GetInitInst().GetSdkInstance())}set progress(v){C3X.RequireFiniteNumber(v);map.get(this)._SetProgress(v)}get progress(){return map.get(this)._GetProgress()}set maximum(v){C3X.RequireFiniteNumber(v);map.get(this)._SetMaximum(v)}get maximum(){return map.get(this)._GetMaximum()}set tooltip(t){C3X.RequireString(t);
+map.get(this)._SetTooltip(t)}get tooltip(){return map.get(this)._GetTooltip()}setIndeterminate(){map.get(this)._SetIndeterminate()}}}{const C3=self.C3;C3.Plugins.progressbar.Cnds={OnClicked(){return true},CompareProgress(cmp,x){return C3.compare(this._GetProgress(),cmp,x)}}}{const C3=self.C3;C3.Plugins.progressbar.Acts={SetTooltip(title){this._SetTooltip(title)},SetProgress(x){this._SetProgress(x)},SetMaximum(x){this._SetMaximum(x)},SetIndeterminate(){this._SetIndeterminate()}}}
+{const C3=self.C3;C3.Plugins.progressbar.Exps={Progress(){return this._GetProgress()},Maximum(){return this._GetMaximum()}}};
+
+}
+
+{
 'use strict';{const C3=self.C3;C3.Behaviors.Platform=class PlatformBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}}{const C3=self.C3;C3.Behaviors.Platform.Type=class PlatformType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}}
 {const C3=self.C3;const C3X=self.C3X;const IBehaviorInstance=self.IBehaviorInstance;const MAX_SPEED=0;const ACCELERATION=1;const DECELERATION=2;const JUMP_STRENGTH=3;const GRAVITY=4;const MAX_FALL_SPEED=5;const DOUBLE_JUMP=6;const JUMP_SUSTAIN=7;const DEFAULT_CONTROLS=8;const ENABLE=9;const FALLTHROUGH_TIMEOUT=.05;function accelerate(velocity,min_speed,max_speed,acceleration,dt){const min=min_speed*dt;const max=max_speed*dt;return C3.clamp(velocity*dt+.5*acceleration*dt*dt,min,max)}C3.Behaviors.Platform.Instance=
 class PlatformInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);this._keyboardDisposables=null;this._leftKey=false;this._rightKey=false;this._jumpKey=false;this._jumped=false;this._doubleJumped=false;this._canDoubleJump=false;this._ignoreInput=false;this._simLeft=false;this._simRight=false;this._simJump=false;this._lastFloorObject=null;this._loadFloorUid=-1;this._lastFloorX=0;this._lastFloorY=0;this._floorIsJumpthru=false;this._wasOnFloor=false;this._wasOverJumpthru=
@@ -4727,6 +4739,7 @@ self.C3_GetObjectRefTable = function () {
 		C3.Plugins.Touch,
 		C3.Plugins.Spritefont2,
 		C3.Plugins.Text,
+		C3.Plugins.progressbar,
 		C3.Plugins.Sprite.Cnds.OnCollision,
 		C3.Plugins.System.Acts.GoToLayout,
 		C3.Plugins.System.Cnds.Every,
@@ -4737,10 +4750,15 @@ self.C3_GetObjectRefTable = function () {
 		C3.Behaviors.Platform.Acts.SimulateControl,
 		C3.Plugins.Sprite.Acts.SetMirrored,
 		C3.Plugins.Sprite.Acts.SetAnim,
+		C3.Plugins.System.Cnds.Compare,
+		C3.Behaviors.Platform.Exps.JumpStrength,
+		C3.Plugins.progressbar.Acts.SetProgress,
+		C3.Plugins.progressbar.Exps.Progress,
+		C3.Behaviors.Platform.Acts.SetJumpStrength,
+		C3.Plugins.Touch.Cnds.OnTouchEnd,
 		C3.Plugins.System.Acts.Wait,
 		C3.Behaviors.Platform.Cnds.OnMove,
 		C3.Plugins.Sprite.Cnds.IsAnimPlaying,
-		C3.Plugins.System.Cnds.Compare,
 		C3.Behaviors.Platform.Exps.MaxSpeed,
 		C3.Behaviors.Platform.Cnds.OnStop,
 		C3.Behaviors.Platform.Cnds.OnLand,
@@ -4799,6 +4817,7 @@ self.C3_JsPropNameTable = [
 	{Sprite10: 0},
 	{FonteDeSprites: 0},
 	{Texto: 0},
+	{BarraDeProgresso: 0},
 	{tentativas: 0}
 ];
 
@@ -4829,7 +4848,8 @@ self.InstanceType = {
 	Sprite9: class extends self.ISpriteInstance {},
 	Sprite10: class extends self.ISpriteInstance {},
 	FonteDeSprites: class extends self.ISpriteFontInstance {},
-	Texto: class extends self.ITextInstance {}
+	Texto: class extends self.ITextInstance {},
+	BarraDeProgresso: class extends self.IProgressBarInstance {}
 }
 }
 
@@ -4940,12 +4960,22 @@ self.C3_ExpressionFuncs = [
 			const f0 = p._GetNode(0).GetBoundMethod();
 			return () => f0(0, 4000);
 		},
-		() => "Jump",
-		() => 0.3,
+		() => "preparando",
 		p => {
 			const n0 = p._GetNode(0);
 			return () => n0.ExpBehavior();
 		},
+		() => 650,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 25);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpBehavior() + 25);
+		},
+		() => "Jump",
+		() => 0.2,
 		() => 500,
 		() => "Run",
 		() => "Walk",
@@ -4976,6 +5006,7 @@ self.C3_ExpressionFuncs = [
 		() => 280,
 		() => 45,
 		() => 135,
+		() => 0.3,
 		() => 0.6
 ];
 
